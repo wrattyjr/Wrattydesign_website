@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
+import Head from 'next/head'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
   const wfPageRef = useRef(pageProps.wfPage)
-
-  // Keep ref current on every render so onLoad and useEffect always read the right page ID
   wfPageRef.current = pageProps.wfPage
 
-  const initWebflow = () => {
+  // Re-initialize Webflow on client-side navigation
+  useEffect(() => {
     if (wfPageRef.current) {
       document.documentElement.setAttribute('data-wf-page', wfPageRef.current)
     }
@@ -20,17 +20,24 @@ export default function App({ Component, pageProps }) {
         window.Webflow.require('ix2').init()
       }
     } catch (e) {}
-  }
-
-  // Re-initialize on every client-side navigation
-  useEffect(() => {
-    initWebflow()
   }, [router.asPath])
 
   return (
     <>
-      {/* onLoad fires right after webflow.js executes — guaranteed correct init order */}
-      <Script src="/js/webflow.js" strategy="afterInteractive" onLoad={initWebflow} />
+      {/* Inline script sets data-wf-page synchronously in the SSR HTML,
+          before any deferred scripts run. Webflow reads this attribute
+          at init time to load the correct page interactions. */}
+      {pageProps.wfPage && (
+        <Head>
+          <script
+            key="wf-page-id"
+            dangerouslySetInnerHTML={{
+              __html: `document.documentElement.setAttribute('data-wf-page','${pageProps.wfPage}')`,
+            }}
+          />
+        </Head>
+      )}
+      <Script src="/js/webflow.js" strategy="afterInteractive" />
       <Component {...pageProps} />
     </>
   )
