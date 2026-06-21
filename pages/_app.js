@@ -1,6 +1,21 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Script from 'next/script'
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter()
+
+  useEffect(() => {
+    if (pageProps.wfPage) {
+      document.documentElement.setAttribute('data-wf-page', pageProps.wfPage)
+    }
+    if (window.Webflow) {
+      window.Webflow.destroy()
+      window.Webflow.ready()
+      window.Webflow.require('ix2').init()
+    }
+  }, [router.asPath, pageProps.wfPage])
+
   return (
     <>
       <Script

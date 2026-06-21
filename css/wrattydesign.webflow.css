@@ -1,6 +1,6 @@
 @font-face {
   font-family: Archivo Variable;
-  src: url('../images/') format("truetype");
+  src: url('../fonts/Archivo-VariableFont_wdthwght.ttf') format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: Archivo Variable;
-  src: url('../images/') format("truetype");
+  src: url('../fonts/Archivo-Italic-VariableFont_wdthwght.ttf') format("truetype");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -3019,14 +3019,14 @@ figcaption {
 
 @font-face {
   font-family: 'Archivo Variable';
-  src: url('../images/') format('truetype');
+  src: url('../fonts/Archivo-VariableFont_wdthwght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Archivo Variable';
-  src: url('../images/') format('truetype');
+  src: url('../fonts/Archivo-Italic-VariableFont_wdthwght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
