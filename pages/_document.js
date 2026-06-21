@@ -26,11 +26,10 @@ export default function Document() {
         />
         <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
         <link href="/images/webclip.png" rel="apple-touch-icon" />
-        {/* jQuery must load before webflow.js — beforeInteractive only works reliably in _document.js */}
+        {/* jQuery must load before webflow.js. No integrity/crossOrigin — the
+            Webflow CDN doesn't send CORS headers so the browser would block it. */}
         <Script
           src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=664fbfb72673479a5d7256da"
-          integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-          crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
       </Head>
