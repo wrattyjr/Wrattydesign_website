@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Script from 'next/script'
 import Head from 'next/head'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
@@ -41,6 +42,7 @@ export default function App({ Component, pageProps }) {
       <Script src="/js/webflow.js" strategy="afterInteractive" />
       <Component {...pageProps} />
       <SpeedInsights />
+      <Analytics />
     </>
   )
 }
